@@ -1,2 +1,44 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+#include <iostream> // for console input&output
+#include <fstream> // for file input&output
+using namespace std;
+
+
+int main() // driver function
+{
+	// getting from keyboard and/or console
+	int age = 0;
+	cout << "\nEnter a number: ";
+	cin >> age; // read from console
+
+	ifstream inStream; // input file stream
+
+	inStream.open("infile.dat"); // physical file to read from (absolute C:\ or relative ..\)
+
+
+	if (inStream.fail()) // must validate the input file (-10)
+	{
+		cout << "ERROR: file cannot be accessed.\n";
+		return -1; // EXIT_FAILURE
+	}
+
+	// getting from a file 
+	inStream >> age; // read from a file
+
+	if (age > 50)
+		cout << "You are too old.\n";
+	else
+		cout << "You  are still young.\n";
+
+	inStream.close(); // MUST close the file after completely used
+
+	ofstream outStream; // output file stream
+
+	outStream.open("outfile.dat"); // always overwrite
+	outStream << "Your age is, " << age << ".\n"; // write data to the output file
+	outStream.close(); // MUST close the file when finished
+
+
+	return 0;
+}
